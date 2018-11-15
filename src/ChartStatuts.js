@@ -1,5 +1,5 @@
 import React from "react";
-import { PieChart, Pie, Sector, Cell } from "recharts";
+import { PieChart, Pie, Cell } from "recharts";
 
 import { withStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
@@ -48,7 +48,6 @@ const getChartData = data => {
   return [];
 };
 
-// const RADIAN = Math.PI / 180;
 const renderCustomizedLabel = props =>
   `${props.payload.name} : ${props.payload.count}`;
 

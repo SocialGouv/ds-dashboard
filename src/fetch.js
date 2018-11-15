@@ -1,4 +1,6 @@
-const _fetch = url =>
+import memoize from "memoizee";
+
+const _fetch = memoize(url =>
   fetch(url, {
     headers: { Authorization: "Basic 123" }
   })
@@ -8,6 +10,7 @@ const _fetch = url =>
         throw new Error(`fetch error ${url}`);
       }
       return json.result;
-    });
+    })
+);
 
 export default _fetch;
