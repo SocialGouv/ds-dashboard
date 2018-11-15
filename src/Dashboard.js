@@ -20,13 +20,11 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Grid from "@material-ui/core/Grid";
 
-import fetch from "./fetch";
+import fetchDs from "./fetchDs";
 import AsyncFetch from "./AsyncFetch";
 import ChartSubmissions from "./ChartSubmissions";
 import ChartDuration from "./ChartDuration";
 import ChartStatuts from "./ChartStatuts";
-
-import config from "./config.json";
 
 function _typeof(obj) {
   return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol
@@ -145,12 +143,14 @@ const CardNumber = ({ title, value }) => (
   </Grid>
 );
 
-const sum = arr => arr.reduce((s, c) => s + c, 0);
+//const sum = arr => arr.reduce((s, c) => s + c, 0);
 
 const fetchAllData = async urls => {
   // sum up multiple results and make averages
-  const result = await Promise.all(urls.map(url => fetch(url)));
-  const summed = mergeByKey(...result);
+  const result = await Promise.all(urls.map(url => fetchDs(url)));
+
+  const summed = result.slice(1).reduce((a, c) => mergeByKey(a, c), result[0]);
+
   summed.duration /= result.length;
   summed.monthly = Object.keys(summed.monthly).reduce((a, c) => {
     return {
@@ -165,7 +165,7 @@ const fetchAllData = async urls => {
 };
 
 const fetchData = urls =>
-  urls.length === 1 ? fetch(urls[0]) : fetchAllData(urls);
+  urls.length === 1 ? fetchDs(urls[0]) : fetchAllData(urls);
 
 const Stats = ({ title, data }) => (
   <AsyncFetch
@@ -211,14 +211,13 @@ const Stats = ({ title, data }) => (
   />
 );
 
-class Dashboard extends React.Component {
+class _Dashboard extends React.Component {
   state = {
     open: true
   };
 
   render() {
-    const { classes } = this.props;
-
+    const { config, classes } = this.props;
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -240,7 +239,7 @@ class Dashboard extends React.Component {
               noWrap
               className={classes.title}
             >
-              Dashboard
+              {config.title}
             </Typography>
           </Toolbar>
         </AppBar>
@@ -299,8 +298,19 @@ class Dashboard extends React.Component {
   }
 }
 
-Dashboard.propTypes = {
-  classes: PropTypes.object.isRequired
-};
+const Dashboard = props => (
+  <AsyncFetch
+    autoFetch={true}
+    fetch={() => fetch("/config.json").then(r => r.json())}
+    render={({ status, result }) =>
+      (status === "success" &&
+        result && <_Dashboard {...props} config={result} />) || (
+        <Typography color="textPrimary">
+          Impossible de charger la configuration du dashboard (config.json)
+        </Typography>
+      )
+    }
+  />
+);
 
 export default withStyles(styles)(Dashboard);
