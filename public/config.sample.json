@@ -1,0 +1,34 @@
+{
+  "title": "Work in France",
+  "groups": [
+    {
+      "title": "France entière",
+      "url": "/national",
+      "data": [
+        "http://127.0.0.1:3005/stats",
+        "http://127.0.0.1:3006/stats",
+        "http://127.0.0.1:3007/stats"
+      ]
+    },
+    {
+      "title": "Paris",
+      "url": "/paris",
+      "data": ["http://127.0.0.1:3005/stats"]
+    },
+    {
+      "title": "Lyon",
+      "url": "/lyon",
+      "data": ["http://127.0.0.1:3005/stats", "http://127.0.0.1:3005/stats"]
+    }
+  ],
+  "links": [
+    {
+      "title": "FAQ",
+      "url": "https://workinfrance.beta.gouv.fr/faq.html"
+    },
+    {
+      "title": "workinfrance.beta.gouv.fr",
+      "url": "https://workinfrance.beta.gouv.fr"
+    }
+  ]
+}
