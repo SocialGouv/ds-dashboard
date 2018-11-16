@@ -51,7 +51,7 @@ function mergeByKey(obj1, obj2, cb) {
     } else if (cb && typeof cb === "function") {
       obj[key] = cb(obj1[key], obj2[key]);
     } else {
-      obj[key] = obj1[key] + obj2[key];
+      obj[key] = obj1[key] + ((obj2 && obj2[key]) || 0);
     }
   });
   return obj;
