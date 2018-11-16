@@ -277,7 +277,12 @@ class _Dashboard extends React.Component {
           <Divider />
           <List>
             {config.links.map(link => (
-              <a href={link.url} target="_blank" rel="noopener noreferrer">
+              <a
+                href={link.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                key={link.url}
+              >
                 <ListItem button>
                   <ListItemIcon style={{ marginRight: 8 }}>
                     <LaunchIcon />
