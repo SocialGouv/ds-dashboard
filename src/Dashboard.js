@@ -3,7 +3,10 @@ import PropTypes from "prop-types";
 import { Link, Route } from "react-router-dom";
 import classNames from "classnames";
 import CountUp from "react-countup";
+import memoize from "memoizee";
 
+import Button from "@material-ui/core/Button";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import AppBar from "@material-ui/core/AppBar";
 import Typography from "@material-ui/core/Typography";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -16,8 +19,10 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import BarChartIcon from "@material-ui/icons/BarChart";
+import LaunchIcon from "@material-ui/icons/Launch";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
+import CardActions from "@material-ui/core/CardActions";
 import Grid from "@material-ui/core/Grid";
 
 import fetchDs from "./fetchDs";
@@ -25,6 +30,10 @@ import AsyncFetch from "./AsyncFetch";
 import ChartSubmissions from "./ChartSubmissions";
 import ChartDuration from "./ChartDuration";
 import ChartStatuts from "./ChartStatuts";
+
+const memoFetch = memoize(url => fetch(url).then(r => r.json()), {
+  promise: true
+});
 
 function _typeof(obj) {
   return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol
@@ -202,11 +211,7 @@ const Stats = ({ title, data }) => (
             <br />
             <ChartStatuts data={result} />
           </div>
-        )) || (
-        <Typography color="textPrimary">
-          Impossible de charger les données
-        </Typography>
-      )
+        )) || <CircularProgress />
     }
   />
 );
@@ -255,41 +260,45 @@ class _Dashboard extends React.Component {
           <div className={classes.toolbarIcon} />
           <Divider />
           <List>
-            {config.procedures.map(procedure => (
-              <Link to={procedure.url} key={procedure.url}>
+            {config.groups.map(group => (
+              <Link to={group.url} key={group.url}>
                 <ListItem button>
-                  <ListItemIcon>
+                  <ListItemIcon style={{ marginRight: 8 }}>
                     <BarChartIcon />
                   </ListItemIcon>
-                  <ListItemText primary={procedure.title} />
+                  <ListItemText
+                    style={{ paddingLeft: 0 }}
+                    primary={group.title}
+                  />
                 </ListItem>
               </Link>
             ))}
           </List>
           <Divider />
           <List>
-            <ListItem button>
-              <ListItemIcon>
-                <BarChartIcon />
-              </ListItemIcon>
-              <ListItemText primary="FAQ" />
-            </ListItem>
-            <ListItem button>
-              <ListItemIcon>
-                <BarChartIcon />
-              </ListItemIcon>
-              <ListItemText primary="Vérification d'autorisation" />
-            </ListItem>
+            {config.links.map(link => (
+              <a href={link.url} target="_blank" rel="noopener noreferrer">
+                <ListItem button>
+                  <ListItemIcon style={{ marginRight: 8 }}>
+                    <LaunchIcon />
+                  </ListItemIcon>
+                  <ListItemText
+                    style={{ paddingLeft: 0 }}
+                    primary={link.title}
+                  />
+                </ListItem>
+              </a>
+            ))}
           </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          {config.procedures.map(procedure => (
+          {config.groups.map(group => (
             <Route
               exact
-              key={procedure.url}
-              path={procedure.url}
-              render={() => <Stats {...procedure} />}
+              key={group.url}
+              path={group.url}
+              render={() => <Stats {...group} />}
             />
           ))}
         </main>
@@ -298,18 +307,34 @@ class _Dashboard extends React.Component {
   }
 }
 
+const LoadError = ({ onRetryClick }) => (
+  <Card>
+    <CardContent>
+      <Typography component="p">Cannot load config.json</Typography>
+    </CardContent>
+    <CardActions>
+      <Button onClick={onRetryClick} size="small">
+        Retry
+      </Button>
+    </CardActions>
+  </Card>
+);
+
 const Dashboard = props => (
   <AsyncFetch
     autoFetch={true}
-    fetch={() => fetch("/config.json").then(r => r.json())}
-    render={({ status, result }) =>
-      (status === "success" &&
-        result && <_Dashboard {...props} config={result} />) || (
-        <Typography color="textPrimary">
-          Impossible de charger la configuration du dashboard (config.json)
-        </Typography>
-      )
-    }
+    fetch={() => memoFetch("/config.json")}
+    render={({ status, result, fetch }) => {
+      if (status === "error") {
+        return <LoadError onRetryClick={fetch} />;
+      }
+      return (
+        (status === "success" &&
+          result && <_Dashboard {...props} config={result} />) || (
+          <CircularProgress />
+        )
+      );
+    }}
   />
 );
 
