@@ -1,9 +1,7 @@
 import memoize from "memoizee";
 
 const _fetch = memoize(url =>
-  fetch(url, {
-    headers: { Authorization: "Basic 123" }
-  })
+  fetch(url, {})
     .then(r => r.json())
     .then(json => {
       if (!json.success) {

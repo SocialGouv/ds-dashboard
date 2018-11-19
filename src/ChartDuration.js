@@ -4,8 +4,8 @@ import { format } from "date-fns";
 import frLocale from "date-fns/locale/fr";
 
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+
+import { Typography, Paper } from "@material-ui/core";
 
 import SimpleLineChart from "./SimpleLineChart";
 
@@ -40,7 +40,7 @@ const getChartData = data => {
 
 const ChartDuration = ({ classes, data }) => (
   <Paper className={classes.root} elevation={1}>
-    <Typography variant="h5" component="h3">
+    <Typography variant="subtitle1" component="h3">
       Temps de traitement par mois
     </Typography>
     <br />

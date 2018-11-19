@@ -2,8 +2,7 @@ import React from "react";
 import { PieChart, Pie, Cell } from "recharts";
 
 import { withStyles } from "@material-ui/core/styles";
-import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
+import { Typography, Paper } from "@material-ui/core";
 
 const styles = theme => ({
   root: {
@@ -53,14 +52,17 @@ const renderCustomizedLabel = props =>
 
 const ChartStatuts = ({ classes, data }) => {
   const pieData = getChartData(data);
+  const pieWidth =
+    (typeof window !== undefined && Math.min(window.innerWidth * 0.8, 800)) ||
+    800;
   return (
     <Paper className={classes.root} elevation={1}>
-      <Typography variant="h5" component="h3">
+      <Typography variant="subtitle1" component="h3">
         Répartition des dossiers par statut
       </Typography>
       <br />
       <br />
-      <PieChart width={800} height={400}>
+      <PieChart width={pieWidth} height={400}>
         <Pie
           label={renderCustomizedLabel}
           data={pieData}
