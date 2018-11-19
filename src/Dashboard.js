@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import memoize from "memoizee";
 
 import {
@@ -132,14 +132,17 @@ class _Dashboard extends React.Component {
         />
         <main className={classes.content}>
           <div className={classes.appBarSpacer} />
-          {config.groups.map(group => (
-            <Route
-              exact
-              key={group.url}
-              path={group.url}
-              render={() => <Stats {...group} />}
-            />
-          ))}
+          <Switch>
+            {config.groups.map(group => (
+              <Route
+                exact
+                key={group.url}
+                path={group.url}
+                render={() => <Stats {...group} />}
+              />
+            ))}
+            <Route render={() => <Redirect to={config.groups[0].url} />} />
+          </Switch>
         </main>
       </div>
     );
