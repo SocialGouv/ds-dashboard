@@ -61,31 +61,18 @@ const DrawerContent = ({ config, classes }) => (
 
 const AppBar = ({ config, classes, handleDrawerToggle, drawerOpen }) => (
   <React.Fragment>
-    <_AppBar position="fixed" className={classNames(classes.appBar)}>
-      <Toolbar disableGutters={!drawerOpen} className={classes.toolbar}>
-        <Hidden smUp>
-          <IconButton
-            color="inherit"
-            aria-label="Open drawer"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Hidden>
-        <Typography
-          component="h1"
-          variant="h5"
+    <div style={{ alignItems: "start" }}>
+      <Hidden smUp>
+        <IconButton
           color="inherit"
-          noWrap
-          style={{ marginLeft: 10 }}
-          className={classes.title}
+          aria-label="Open drawer"
+          onClick={handleDrawerToggle}
+          className={classes.menuButton}
         >
-          {config.title}
-        </Typography>
-      </Toolbar>
-    </_AppBar>
-
+          <MenuIcon />
+        </IconButton>
+      </Hidden>
+    </div>
     <Hidden smUp>
       <Drawer
         variant="temporary"

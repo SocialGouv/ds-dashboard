@@ -50,7 +50,7 @@ const ChartDuration = ({ classes, data }) => (
         name="Temps de traitement moyen en jours"
         type="linear"
         dataKey="total"
-        stroke="#8884d8"
+        stroke="#0053b3"
       />
     </SimpleLineChart>
   </Paper>

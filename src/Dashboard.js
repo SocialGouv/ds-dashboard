@@ -131,7 +131,6 @@ class _Dashboard extends React.Component {
           drawerOpen={this.state.drawerOpen}
         />
         <main className={classes.content}>
-          <div className={classes.appBarSpacer} />
           <Switch>
             {config.groups.map(group => (
               <Route

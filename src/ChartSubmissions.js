@@ -62,8 +62,8 @@ const ChartSubmissions = ({ classes, data }) => (
         <YAxis />
         <Tooltip />
         <Legend wrapperStyle={{ paddingTop: 20 }} />
-        <Bar dataKey="total" fill="#8884d8" name="Dossiers déposés" />
-        <Bar dataKey="closed" fill="#82ca9d" name="Dossiers acceptés" />
+        <Bar dataKey="total" fill="#0053b3" name="Dossiers déposés" />
+        <Bar dataKey="closed" fill="#b4e1fa" name="Dossiers acceptés" />
       </BarChart>
     </ResponsiveContainer>
   </Paper>
