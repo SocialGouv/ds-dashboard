@@ -3,6 +3,7 @@ import { PieChart, Pie, Cell } from "recharts";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, Paper } from "@material-ui/core";
+import ResponsiveContainer from "recharts/lib/component/ResponsiveContainer";
 
 const styles = theme => ({
   root: {
@@ -52,9 +53,6 @@ const renderCustomizedLabel = props =>
 
 const ChartStatuts = ({ classes, data }) => {
   const pieData = getChartData(data);
-  const pieWidth =
-    (typeof window !== undefined && Math.min(window.innerWidth * 0.8, 800)) ||
-    800;
   return (
     <Paper className={classes.root} elevation={1}>
       <Typography variant="subtitle1" component="h3">
@@ -62,19 +60,21 @@ const ChartStatuts = ({ classes, data }) => {
       </Typography>
       <br />
       <br />
-      <PieChart width={pieWidth} height={400}>
-        <Pie
-          label={renderCustomizedLabel}
-          data={pieData}
-          dataKey="count"
-          fill="#8884d8"
-        >
-          {pieData &&
-            pieData.map((entry, index) => (
-              <Cell key={entry.color} fill={entry.color} />
-            ))}
-        </Pie>
-      </PieChart>
+      <ResponsiveContainer height={400}>
+        <PieChart>
+          <Pie
+            label={renderCustomizedLabel}
+            data={pieData}
+            dataKey="count"
+            fill="#8884d8"
+          >
+            {pieData &&
+              pieData.map((entry, index) => (
+                <Cell key={entry.color} fill={entry.color} />
+              ))}
+          </Pie>
+        </PieChart>
+      </ResponsiveContainer>
     </Paper>
   );
 };

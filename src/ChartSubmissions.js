@@ -1,12 +1,21 @@
 import React from "react";
-import Line from "recharts/lib/cartesian/Line";
 import { format } from "date-fns";
 import frLocale from "date-fns/locale/fr";
 
 import { withStyles } from "@material-ui/core/styles";
 import { Typography, Paper } from "@material-ui/core";
 
-import SimpleLineChart from "./SimpleLineChart";
+//import {BarChart, CartesianGrid, XAxis, YAxis,Tooltip,Legend,Bar} from
+
+import BarChart from "recharts/lib/chart/BarChart";
+
+import ResponsiveContainer from "recharts/lib/component/ResponsiveContainer";
+import CartesianGrid from "recharts/lib/cartesian/CartesianGrid";
+import Legend from "recharts/lib/component/Legend";
+import Tooltip from "recharts/lib/component/Tooltip";
+import Bar from "recharts/lib/cartesian/Bar";
+import XAxis from "recharts/lib/cartesian/XAxis";
+import YAxis from "recharts/lib/cartesian/YAxis";
 
 const styles = theme => ({
   root: {
@@ -45,21 +54,18 @@ const ChartSubmissions = ({ classes, data }) => (
     </Typography>
     <br />
     <br />
-    <SimpleLineChart data={getChartData(data)}>
-      <Line
-        name="Dossiers déposés"
-        type="monotone"
-        dataKey="total"
-        stroke="#8884d8"
-      />
-      <Line
-        name="Dossiers acceptés"
-        type="monotone"
-        dataKey="closed"
-        stroke="#82ca9d"
-        activeDot={{ r: 8 }}
-      />
-    </SimpleLineChart>
+
+    <ResponsiveContainer height={400}>
+      <BarChart data={getChartData(data)}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend wrapperStyle={{ paddingTop: 20 }} />
+        <Bar dataKey="total" fill="#8884d8" name="Dossiers déposés" />
+        <Bar dataKey="closed" fill="#82ca9d" name="Dossiers acceptés" />
+      </BarChart>
+    </ResponsiveContainer>
   </Paper>
 );
 

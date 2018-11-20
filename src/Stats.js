@@ -37,7 +37,7 @@ function mergeByKey(obj1, obj2, cb) {
   return obj;
 }
 
-const CardNumber = ({ title, value }) => (
+const CardNumber = ({ title, value, suffix = "" }) => (
   <Grid item xs={12} sm={6} lg={4}>
     <Card>
       <CardContent style={{ textAlign: "center" }}>
@@ -46,6 +46,7 @@ const CardNumber = ({ title, value }) => (
         </Typography>
         <Typography variant="h4">
           <CountUp end={value} />
+          {suffix}
         </Typography>
       </CardContent>
     </Card>
@@ -99,8 +100,9 @@ const Stats = ({ title, data }) => (
                 value={result.status.closed && result.status.closed.count}
               />
               <CardNumber
-                title="Temps de traitement moyen en jours"
+                title="Temps de traitement moyen"
                 value={parseInt(result.duration)}
+                suffix={parseInt(result.duration) > 1 ? " jours" : " jour"}
               />
             </Grid>
             <br />
