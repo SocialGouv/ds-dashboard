@@ -6,7 +6,13 @@ Tableau de bord pour [ds-collector](https://github.com/SocialGouv/ds-collector).
 
 Editer `./public/config.json` pour configurer le dashboard.
 
-Ce fichier peut également être modifié au runtime :
+Copier/Customiser `./public/index.html.sample` en `./public/index.html`.
+
+`yarn start` pour lancer l'environnement de dev.
+
+## Docker
+
+Le fichier `config.json` peut également être modifié au runtime :
 
 ```sh
 docker build . -t ds-dashboard
