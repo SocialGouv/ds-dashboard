@@ -25,24 +25,21 @@ const styles = theme => ({
   }
 });
 
-const dateFormat = str =>
-  format(new Date(str), "MMMM YYYY", { locale: frLocale });
+const dateFormat = str => format(new Date(str), "MMM YY", { locale: frLocale });
 
 const getChartData = data => {
   if (data) {
-    return Object.keys(data.monthly)
-      .filter((a, i, l) => i < l.length - 1)
-      .reduce(
-        (months, month) => [
-          ...months,
-          {
-            name: dateFormat(month),
-            closed: data.monthly[month].status.closed.count,
-            total: data.monthly[month].count
-          }
-        ],
-        []
-      );
+    return Object.keys(data.monthly).reduce(
+      (months, month) => [
+        ...months,
+        {
+          name: dateFormat(month),
+          closed: data.monthly[month].status.closed.count,
+          total: data.monthly[month].count
+        }
+      ],
+      []
+    );
   }
   return [];
 };
@@ -58,12 +55,12 @@ const ChartSubmissions = ({ classes, data }) => (
     <ResponsiveContainer height={400}>
       <BarChart data={getChartData(data)}>
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
-        <YAxis />
-        <Tooltip />
-        <Legend wrapperStyle={{ paddingTop: 20 }} />
+        <XAxis dataKey="name" tick={{ fontFamily: "sans-serif" }} />
+        <YAxis tick={{ fontFamily: "sans-serif" }} />
+        <Tooltip wrapperStyle={{ fontFamily: "sans-serif" }} />
+        <Legend wrapperStyle={{ paddingTop: 20, fontFamily: "sans-serif" }} />
         <Bar dataKey="total" fill="#0053b3" name="Dossiers déposés" />
-        <Bar dataKey="closed" fill="#b4e1fa" name="Dossiers acceptés" />
+        <Bar dataKey="closed" fill="#003b80" name="Dossiers acceptés" />
       </BarChart>
     </ResponsiveContainer>
   </Paper>

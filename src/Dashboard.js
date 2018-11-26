@@ -111,7 +111,7 @@ const theme = createMuiTheme({
   }
 });
 
-class _Dashboard extends React.Component {
+class MyDashboard extends React.Component {
   state = {
     drawerOpen: false
   };
@@ -184,7 +184,7 @@ const ConfigLoader = ({ render }) => (
 const Dashboard = props => (
   <MuiThemeProvider theme={theme}>
     <ConfigLoader
-      render={({ result }) => <_Dashboard {...props} config={result} />}
+      render={({ result }) => <MyDashboard {...props} config={result} />}
     />
   </MuiThemeProvider>
 );

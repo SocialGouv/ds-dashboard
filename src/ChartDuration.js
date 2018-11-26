@@ -17,23 +17,20 @@ const styles = theme => ({
   }
 });
 
-const dateFormat = str =>
-  format(new Date(str), "MMMM YYYY", { locale: frLocale });
+const dateFormat = str => format(new Date(str), "MMM YY", { locale: frLocale });
 
 const getChartData = data => {
   if (data) {
-    return Object.keys(data.monthly)
-      .filter((a, i, l) => i < l.length - 1)
-      .reduce(
-        (months, month) => [
-          ...months,
-          {
-            name: dateFormat(month),
-            total: parseInt(data.monthly[month].duration * 100) / 100
-          }
-        ],
-        []
-      );
+    return Object.keys(data.monthly).reduce(
+      (months, month) => [
+        ...months,
+        {
+          name: dateFormat(month),
+          total: parseInt(data.monthly[month].duration * 100) / 100
+        }
+      ],
+      []
+    );
   }
   return [];
 };

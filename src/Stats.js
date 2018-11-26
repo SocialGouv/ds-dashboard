@@ -56,7 +56,7 @@ const CardNumber = ({ title, value, suffix = "" }) => (
 const fetchAllData = async urls => {
   // sum up multiple results and make averages
   const result = await Promise.all(urls.map(url => fetchDs(url)));
-
+  console.log("result", result);
   const summed = result.slice(1).reduce((a, c) => mergeByKey(a, c), result[0]);
 
   summed.duration /= result.length;
@@ -68,7 +68,7 @@ const fetchAllData = async urls => {
       ...a,
       [c]: {
         ...summed.monthly[c],
-        duration: summed.monthly[c].duration / result.length
+        duration: summed.monthly[c].duration / result.length || 0
       }
     };
   }, {});
@@ -84,6 +84,7 @@ const Stats = ({ title, data }) => (
     autoFetch={true}
     fetch={() => fetchData(data)}
     render={({ status, result }) =>
+      console.log("result2", result) ||
       (result &&
         result.status && (
           <div>

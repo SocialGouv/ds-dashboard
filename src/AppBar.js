@@ -1,19 +1,15 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import classNames from "classnames";
 
 import {
-  Typography,
   Hidden,
   Divider,
   Drawer,
   List,
-  Toolbar,
   IconButton,
   ListItem,
   ListItemIcon,
-  ListItemText,
-  AppBar as _AppBar
+  ListItemText
 } from "@material-ui/core";
 
 import {
@@ -24,8 +20,6 @@ import {
 
 const DrawerContent = ({ config, classes }) => (
   <React.Fragment>
-    <div className={classes.toolbarIcon} />
-    <Divider />
     <List>
       {config.groups.map(group => (
         <Link to={group.url} key={group.url}>

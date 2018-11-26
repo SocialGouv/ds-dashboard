@@ -12,11 +12,11 @@ function SimpleLineChart({ data = [], children }) {
     // 99% per https://github.com/recharts/recharts/issues/172
     <ResponsiveContainer width="99%" height={320}>
       <LineChart data={data}>
-        <XAxis dataKey="name" />
-        <YAxis />
+        <XAxis dataKey="name" tick={{ fontFamily: "sans-serif" }} />
+        <YAxis tick={{ fontFamily: "sans-serif" }} />
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
-        <Tooltip />
-        <Legend wrapperStyle={{ paddingTop: 20 }} />
+        <Tooltip wrapperStyle={{ fontFamily: "sans-serif" }} />
+        <Legend wrapperStyle={{ paddingTop: 20, fontFamily: "sans-serif" }} />
         {children}
       </LineChart>
     </ResponsiveContainer>
