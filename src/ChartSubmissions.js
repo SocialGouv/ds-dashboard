@@ -27,12 +27,19 @@ const styles = theme => ({
 
 const dateFormat = str => format(new Date(str), "MMM YY", { locale: frLocale });
 
+const dateSort = (a, b) => {
+  if (a.month < b.month) return -1;
+  if (a.month > b.month) return 1;
+  return 0;
+};
+
 const getChartData = data => {
   if (data) {
-    return Object.keys(data.monthly).reduce(
+    const rows = Object.keys(data.monthly).reduce(
       (months, month) => [
         ...months,
         {
+          month,
           name: dateFormat(month),
           closed: data.monthly[month].status.closed.count,
           total: data.monthly[month].count
@@ -40,6 +47,8 @@ const getChartData = data => {
       ],
       []
     );
+    rows.sort(dateSort);
+    return rows;
   }
   return [];
 };
@@ -47,7 +56,7 @@ const getChartData = data => {
 const ChartSubmissions = ({ classes, data }) => (
   <Paper className={classes.root} elevation={1}>
     <Typography variant="subtitle1" component="h3">
-      Dossier déposés et acceptés par mois
+      Dossiers déposés et acceptés par mois
     </Typography>
     <br />
     <br />

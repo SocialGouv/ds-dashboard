@@ -19,18 +19,27 @@ const styles = theme => ({
 
 const dateFormat = str => format(new Date(str), "MMM YY", { locale: frLocale });
 
+const dateSort = (a, b) => {
+  if (a.month < b.month) return -1;
+  if (a.month > b.month) return 1;
+  return 0;
+};
+
 const getChartData = data => {
   if (data) {
-    return Object.keys(data.monthly).reduce(
+    const rows = Object.keys(data.monthly).reduce(
       (months, month) => [
         ...months,
         {
           name: dateFormat(month),
+          month,
           total: parseInt(data.monthly[month].duration * 100) / 100
         }
       ],
       []
     );
+    rows.sort(dateSort);
+    return rows;
   }
   return [];
 };

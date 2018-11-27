@@ -70,6 +70,7 @@ const styles = theme => ({
   drawerPaper: {
     position: "relative",
     whiteSpace: "nowrap",
+    background: "#fcfcfc",
     width: drawerWidth,
     transition: theme.transitions.create("width", {
       easing: theme.transitions.easing.sharp,
