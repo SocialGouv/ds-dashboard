@@ -22,7 +22,7 @@ const DrawerContent = ({ config, classes }) => (
   <React.Fragment>
     <List>
       {config.groups.map(group => (
-        <Link to={group.url} key={group.url}>
+        <Link to={group.url} key={group.url} style={{ textDecoration: "none" }}>
           <ListItem button>
             <ListItemIcon style={{ marginRight: 8 }}>
               <BarChartIcon />
@@ -40,6 +40,7 @@ const DrawerContent = ({ config, classes }) => (
           target="_blank"
           rel="noopener noreferrer"
           key={link.url}
+          style={{ textDecoration: "none" }}
         >
           <ListItem button>
             <ListItemIcon style={{ marginRight: 8 }}>
