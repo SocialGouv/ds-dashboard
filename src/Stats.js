@@ -46,38 +46,39 @@ const Stats = ({ title, data }) => (
     autoFetch={true}
     fetch={() => fetchData(data)}
     render={({ status, result }) =>
-      (result &&
-        result.status && (
-          <div>
-            <Typography color="textPrimary" gutterBottom variant="h5">
-              {title}
-            </Typography>
-            <Grid container spacing={24} justify="center">
-              <CardNumber
-                title="Nombre de dossiers déposés"
-                value={result.count}
-              />
-              <CardNumber
-                title="Nombre de dossiers acceptés"
-                value={result.status.closed && result.status.closed.count}
-              />
-              <CardNumber
-                title="Temps de traitement moyen"
-                value={parseInt(result.duration)}
-                suffix={parseInt(result.duration) > 1 ? " jours" : " jour"}
-              />
-            </Grid>
-            <br />
-            <br />
-            <ChartSubmissions data={result} />
-            <br />
-            <br />
-            <ChartDuration data={result} />
-            <br />
-            <br />
-            <ChartStatuts data={result} />
-          </div>
-        )) || <CircularProgress />
+      (result && result.status && (
+        <div>
+          <Typography color="textPrimary" gutterBottom variant="h5">
+            {title}
+          </Typography>
+          <Grid container spacing={24} justify="center">
+            <CardNumber
+              title="Nombre de dossiers déposés"
+              value={result.count}
+            />
+            <CardNumber
+              title="Nombre de dossiers acceptés"
+              value={result.status.closed && result.status.closed.count}
+            />
+            <CardNumber
+              title="Temps de traitement moyen"
+              value={Math.ceil(parseInt(result.duration))}
+              suffix={
+                Math.ceil(parseInt(result.duration)) > 1 ? " jours" : " jour"
+              }
+            />
+          </Grid>
+          <br />
+          <br />
+          <ChartSubmissions data={result} />
+          <br />
+          <br />
+          <ChartDuration data={result} />
+          <br />
+          <br />
+          <ChartStatuts data={result} />
+        </div>
+      )) || <CircularProgress />
     }
   />
 );
