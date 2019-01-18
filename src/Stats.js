@@ -62,9 +62,9 @@ const Stats = ({ title, data }) => (
             />
             <CardNumber
               title="Temps de traitement moyen"
-              value={Math.ceil(parseInt(result.duration))}
+              value={Math.ceil(parseFloat(result.duration))}
               suffix={
-                Math.ceil(parseInt(result.duration)) > 1 ? " jours" : " jour"
+                Math.ceil(parseFloat(result.duration)) > 1 ? " jours" : " jour"
               }
             />
           </Grid>
