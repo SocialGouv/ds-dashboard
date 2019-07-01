@@ -24,11 +24,11 @@
   "links": [
     {
       "title": "FAQ",
-      "url": "https://workinfrance.beta.gouv.fr/faq.html"
+      "url": "http://work-in-france.incubateur.social.gouv.fr/faq"
     },
     {
-      "title": "workinfrance.beta.gouv.fr",
-      "url": "https://workinfrance.beta.gouv.fr"
+      "title": "work-in-france.incubateur.social.gouv.fr",
+      "url": "http://work-in-france.incubateur.social.gouv.fr"
     }
   ]
 }

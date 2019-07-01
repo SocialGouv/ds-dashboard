@@ -399,14 +399,14 @@
                     </g>
                 </g>
                 </svg>
-                <a class="site-title" href="http://workinfrance.beta.gouv.fr">Work in France</a>
+                 <a class="site-title" href="http://work-in-france.incubateur.social.gouv.fr">Work in France</a>
             </div>
             <ul>
                 <li>
-                    <a href="http://workinfrance.beta.gouv.fr/validity_check.html">Vérifier une autorisation</a>
+                    <a href="http://work-in-france.incubateur.social.gouv.fr/validitycheck/">Vérifier une autorisation</a>
                 </li>
                 <li>
-                    <a href="http://workinfrance.beta.gouv.fr/faq.html">Questions/Réponses</a>
+                    <a href="http://work-in-france.incubateur.social.gouv.fr/faq">Questions/Réponses</a>
                 </li>
             </ul>
 
