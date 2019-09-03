@@ -1,0 +1,14 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: wif-dashboard${HASH_BRANCH_NAME}
+  labels:
+    app: wif-dashboard${HASH_BRANCH_NAME}
+    branch: wif-dashboard${HASH_BRANCH_NAME}
+spec:
+  selector:
+    app: wif-dashboard${HASH_BRANCH_NAME}
+  ports:
+    - port: ${PORT}
+      name: api

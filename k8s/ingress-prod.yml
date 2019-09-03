@@ -1,0 +1,19 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wif-dashboard
+  labels:
+    app: wif-dashboard
+    branch: wif-dashboard
+spec:
+  rules:
+    - host: wif-dashboard.incubateur.social.gouv.fr
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wif-dashboard
+              servicePort: ${PORT}
+  tls:
+    - secretName: wif-dashboard-crt-secret

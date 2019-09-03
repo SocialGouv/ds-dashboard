@@ -1,0 +1,17 @@
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: wif-dashboard${HASH_BRANCH_NAME}
+  labels:
+    app: wif-dashboard${HASH_BRANCH_NAME}
+    branch: wif-dashboard${HASH_BRANCH_NAME}
+spec:
+  rules:
+    - host: ${HASH_BRANCH_INGRESS}wif-dashboard.dev.factory.social.gouv.fr
+      http:
+        paths:
+          - path: /
+            backend:
+              serviceName: wif-dashboard${HASH_BRANCH_NAME}
+              servicePort: ${PORT}

@@ -1,0 +1,26 @@
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: wif-dashboard${HASH_BRANCH_NAME}
+  labels:
+    app: wif-dashboard${HASH_BRANCH_NAME}
+    branch: wif-dashboard${HASH_BRANCH_NAME}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wif-dashboard${HASH_BRANCH_NAME}
+  template:
+    metadata:
+      labels:
+        app: wif-dashboard${HASH_BRANCH_NAME}
+    spec:
+      containers:
+        - image: ${CI_REGISTRY_IMAGE}/api:${IMAGE_TAG}
+          name: wif-dashboard
+          ports:
+            - containerPort: ${PORT}
+          env:
+            - name: PORT
+              value: "${PORT}"
