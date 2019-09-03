@@ -5,7 +5,7 @@ const _fetch = memoize(url =>
     .then(r => r.json())
     .then(json => {
       if (!json.success) {
-        throw new Error(`fetch error ${url}`);
+        //throw new Error(`fetch error ${url}`);
       }
       return json.result;
     })
