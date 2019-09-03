@@ -1,3 +1,0 @@
-{
-  "extends": ["react-app", "@socialgouv/eslint-config-recommended"]
-}
