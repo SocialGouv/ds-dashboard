@@ -33,7 +33,10 @@ const CardNumber = ({ title, value, suffix = "" }) => (
 const fetchAllData = async urls => {
   // sum up multiple results and make averages
   const result = await Promise.all(urls.map(url => fetchDs(url)));
-  const summed = result.slice(1).reduce((a, c) => mergeStats(a, c), result[0]);
+  const summed = result
+    .filter(r => r.count)
+    .slice(1)
+    .reduce((a, c) => mergeStats(a, c), result[0]);
   return summed;
 };
 
