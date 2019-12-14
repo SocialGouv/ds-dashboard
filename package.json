@@ -28,6 +28,6 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@socialgouv/eslint-config-recommended": "^0.2.0"
+    "@socialgouv/eslint-config-recommended": "^0.2.3"
   }
 }
